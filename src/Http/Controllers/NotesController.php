@@ -5,6 +5,7 @@ namespace OptimistDigital\NovaNotesField\Http\Controllers;
 use Laravel\Nova\Nova;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 
 class NotesController extends Controller
 {
@@ -16,8 +17,12 @@ class NotesController extends Controller
 
         $model = $validationResult['model'];
         $displayOrder = config('nova-notes-field.display_order', 'DESC');
-        $notes = $model->notes()->orderBy('created_at', $displayOrder)->orderBy('id', $displayOrder)->get();
-
+        if(filter_var($request->fetchTrashed, FILTER_VALIDATE_BOOLEAN)) {
+            $notes = $model->notes()->withTrashed()->orderBy('created_at', $displayOrder)->orderBy('id', $displayOrder)->get();
+        } else {
+            $notes = $model->notes()->orderBy('created_at', $displayOrder)->orderBy('id', $displayOrder)->get();
+        }
+        
         return response()->json([
             'date_format' => config('nova-notes-field.date_format', 'DD MMM YYYY HH:mm'),
             'trix_enabled' => config('nova-notes-field.use_trix_input', false),

@@ -11,9 +11,15 @@
       :trixEnabled="trixEnabled"
     />
 
+    <div class="my-5">
+      <label for="trashed">Show Trashed</label>
+      <input type="checkbox" class="checkbox ml-3" v-model="showTrashed" name="trashed">
+    </div>
+
     <note
       v-for="note in notesToShow"
       :fullWidth="field.fullWidth"
+      :anonymous="anonymous"
       :note="note"
       :key="note.id"
       :date-format="dateFormat"
@@ -58,8 +64,23 @@ export default {
     dateFormat: 'DD MMM YYYY HH:mm',
     trixEnabled: false,
     fullWidth: false,
+    anonymous: false,
+    showTrashed: false,
   }),
+  watch: {
+    showTrashed(value) {
+      if (value) {
+        this.params.fetchTrashed = true;
+        this.fetchNotes();
+      } else {
+        this.params.fetchTrashed = false;
+        this.fetchNotes();
+
+      }
+    },
+  },
   mounted() {
+    this.anonymous = this.field?.anonymize;
     this.fetchNotes();
   },
   computed: {
@@ -67,6 +88,7 @@ export default {
       return {
         resourceId: this.resourceId,
         resourceName: this.resourceName,
+        fetchTrashed: false,
       };
     },
     notesToShow() {
@@ -77,7 +99,8 @@ export default {
       return this.maxToShow && this.notes.length > this.maxToShow;
     },
     classes() {
-      const defaultClasses = 'notes-field bg-20 px-4 pt-4 pb-2 rounded-b-lg overflow-hidden border-b dark:border-gray-700';
+      const defaultClasses =
+        'notes-field bg-20 px-4 pt-4 pb-2 rounded-b-lg overflow-hidden border-b dark:border-gray-700';
       return defaultClasses + (this.extraClass ? ` ${this.extraClass}` : '');
     },
   },

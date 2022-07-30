@@ -60,4 +60,9 @@ class NotesField extends Field
     {
         return $this->withMeta(['fullWidth' => $fullWidth]);
     }
+
+    public function anonymize($anonymize = true)
+    {
+        return $this->withMeta(['anonymize' => $anonymize]);
+    }
 }
