@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-3/5 bg-white rounded border border-40 px-2 py-2 flex mb-2 mt-2"
+    class="w-3/5 bg-white dark:bg-gray-800 rounded border dark:border-gray-700 px-2 py-2 flex mb-2 mt-2"
     :class="{ 'w-full': fullWidth, 'w-3/5': !fullWidth }"
   >
     <div class="rounded-full w-12 h-12 mr-3 overflow-hidden text-center" style="flex-shrink: 0">
@@ -16,7 +16,7 @@
 
     <div>
       <!-- Title area -->
-      <div class="mb-2">
+      <div class="mb-2 space-x-2">
         <span class="font-bold text-lg text-90">{{
           note.created_by_name ? note.created_by_name : __('novaNotesField.systemUserName')
         }}</span>
@@ -39,12 +39,13 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   props: ['note', 'dateFormat', 'fullWidth'],
   computed: {
     formattedCreatedAtDate() {
-      return '22 April 2022';
-      // return moment(this.note.created_at).format(this.dateFormat || 'DD MMM YYYY HH:mm');
+      return moment(this.note.created_at).format(this.dateFormat || 'DD MMM YYYY HH:mm');
     },
   },
 };

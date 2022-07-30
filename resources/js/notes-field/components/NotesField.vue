@@ -3,7 +3,7 @@
     <h3 class="text-90 mb-4">{{ field.name }}</h3>
     <note-input
       v-if="field.addingNotesEnabled"
-      v-model.trim="note"
+      v-model="note"
       @onSubmit="createNote"
       :loading="loading"
       :fullWidth="field.fullWidth"
@@ -33,6 +33,7 @@
 
     <delete-note-confirmation-modal
       v-if="showDeleteConfirmation"
+      :show="showDeleteConfirmation"
       @close="showDeleteConfirmation = false"
       @confirm="deleteNote(noteToDelete)"
     />
@@ -76,7 +77,7 @@ export default {
       return this.maxToShow && this.notes.length > this.maxToShow;
     },
     classes() {
-      const defaultClasses = 'notes-field bg-20 px-4 pt-4 pb-2 rounded-b-lg overflow-hidden border-b border-40';
+      const defaultClasses = 'notes-field bg-20 px-4 pt-4 pb-2 rounded-b-lg overflow-hidden border-b dark:border-gray-700';
       return defaultClasses + (this.extraClass ? ` ${this.extraClass}` : '');
     },
   },

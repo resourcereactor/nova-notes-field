@@ -1,24 +1,30 @@
 {
   "private": true,
   "scripts": {
-    "dev": "mix",
+    "dev": "npm run development",
+    "development": "mix",
     "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
-    "prod": "mix --production",
-    "format": "prettier --write 'resources/**/*.{css,js,vue}'"
+    "prod": "npm run production",
+    "production": "mix --production"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.2.22",
+    "@vue/compiler-sfc": "^3.2.33",
+    "autoprefixer": "^10.4.7",
     "cross-env": "^7.0.3",
-    "laravel-mix": "^6.0.43",
-    "postcss": "^8.4.12",
-    "prettier": "^2.6.2",
+    "form-backend-validation": "^2.3.3",
+    "laravel-mix": "^6.0.41",
+    "lodash": "^4.17.21",
+    "postcss": "^8.4.13",
+    "prettier": "^2.5.1",
     "resolve-url-loader": "^3.1.4",
-    "sass": "^1.50.1",
-    "sass-loader": "^12.6.0",
+    "sass": "^1.45.0",
+    "sass-loader": "^12.4.0",
     "vue-loader": "^16.8.3"
   },
   "dependencies": {
-    "@vue/babel-plugin-jsx": "^1.1.1"
+    "moment": "^2.29.4",
+    "vue": "^3.2.22"
   }
 }

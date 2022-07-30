@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 let path = require('path');
 
-require('./mix');
+require('./nova.mix');
 
 mix
   .setPublicPath('dist')
@@ -9,6 +9,13 @@ mix
   .vue({ version: 3 })
   .nova('optimistdigital/nova-notes-field');
 
-mix.alias({
-  'laravel-nova': path.join(__dirname, 'vendor/laravel/nova/resources/js/mixins/packages.js'),
-});
+  mix.alias({
+    "laravel-nova": path.join(
+      __dirname,
+      "vendor/laravel/nova/resources/js/mixins/packages.js"
+    ),
+    "@": path.join(
+      __dirname,
+      "../../vendor/laravel/nova/resources/js"
+  ),
+  });
