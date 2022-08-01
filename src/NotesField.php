@@ -2,6 +2,7 @@
 
 namespace OptimistDigital\NovaNotesField;
 
+use Nette\Utils\Callback;
 use Laravel\Nova\Fields\Field;
 
 class NotesField extends Field
@@ -61,8 +62,8 @@ class NotesField extends Field
         return $this->withMeta(['fullWidth' => $fullWidth]);
     }
 
-    public function anonymize($anonymize = true)
+    public function anonymize($callback)
     {
-        return $this->withMeta(['anonymize' => $anonymize]);
+        return $this->withMeta(['anonymize' => $callback()]);
     }
 }
