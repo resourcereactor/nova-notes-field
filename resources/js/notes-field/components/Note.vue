@@ -24,7 +24,7 @@
           {{ formattedCreatedAtDate }}{{ note.system ? ` [${__('novaNotesField.systemUserName')}]` : '' }}
         </span>
         <svg
-          v-if="!note.system && note.can_delete"
+          v-if="!note.system && note.can_delete && !note.deleted_at"
           @click="$emit('onDeleteRequested', note)"
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5 inline text-red-600 hover:text-red-800 cursor-pointer"
