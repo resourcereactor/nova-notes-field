@@ -5,10 +5,13 @@ namespace OptimistDigital\NovaNotesField\Models;
 use Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OptimistDigital\NovaNotesField\NotesFieldServiceProvider;
 
 class Note extends Model
 {
+    use SoftDeletes;
+    
     protected $table = 'nova_notes';
     protected $casts = ['system' => 'bool'];
     protected $fillable = ['model_id', 'model_type', 'text', 'created_by', 'system'];
@@ -60,7 +63,7 @@ class Note extends Model
 
     public function getCanDeleteAttribute()
     {
-        if (Gate::has('delete-nova-note')) return Gate::check('delete-nova-note', $this);
+        //if (Gate::has('delete-nova-note')) return Gate::check('delete-nova-note', $this);
 
         $user = Auth::user();
         if (empty($user)) return false;
