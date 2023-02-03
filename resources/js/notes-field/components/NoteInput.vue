@@ -12,15 +12,14 @@
       />
     </div>
 
-    <textarea
+    <SuggestionsBox
       v-else
-      rows="3"
-      :placeholder="placeholder"
-      class="form-control w-full form-input form-input-bordered py-3 h-auto"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value.trim())"
+      :class="fullWidth ? 'w-full' : 'w-3/5'"
+      :suggestions="suggestions"
+      @update="updateNote"
       @keydown.enter="onEnter"
-    />
+      :reset="modelValue"
+    ></SuggestionsBox>
 
     <div class="whitespace-no-wrap flex-shrink-0 ml-2">
       <button
@@ -37,9 +36,23 @@
 
 <script>
 export default {
-  props: ['placeholder', 'modelValue', 'loading', 'trixEnabled', 'fullWidth'],
+  props: ['placeholder', 'modelValue', 'loading', 'trixEnabled', 'fullWidth', 'field'],
   emits: ['update:modelValue'],
+
+  computed: {
+    suggestions() {
+      if (!this.field.suggestions) {
+        return [];
+      }
+
+      return this.field.suggestions;
+    },
+  },
   methods: {
+    updateNote(value) {
+      this.$emit('update:modelValue', value);
+    },
+
     initialize() {
       this.$refs.trixEditor.editor.loadHTML(this.modelValue);
     },

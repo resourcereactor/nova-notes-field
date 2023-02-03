@@ -5,6 +5,7 @@
       v-if="field.addingNotesEnabled"
       v-model="note"
       @onSubmit="createNote"
+      :field="field"
       :loading="loading"
       :fullWidth="field.fullWidth"
       :placeholder="field.placeholder || __('novaNotesField.defaultPlaceholder')"

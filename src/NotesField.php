@@ -66,4 +66,9 @@ class NotesField extends Field
     {
         return $this->withMeta(['anonymize' => $callback()]);
     }
+
+    public function suggestions($suggestions)
+    {
+        return $this->withMeta(['suggestions' => $suggestions]);
+    }
 }
