@@ -13,7 +13,7 @@
 
     <div class="my-5">
       <label for="trashed">Show Trashed</label>
-      <input type="checkbox" class="checkbox ml-3" v-model="showTrashed" name="trashed">
+      <input type="checkbox" class="checkbox ml-3" v-model="showTrashed" name="trashed" />
     </div>
 
     <note
@@ -38,6 +38,7 @@
     </div>
 
     <delete-note-confirmation-modal
+      @click.stop
       v-if="showDeleteConfirmation"
       :show="showDeleteConfirmation"
       @close="showDeleteConfirmation = false"
@@ -75,7 +76,6 @@ export default {
       } else {
         this.params.fetchTrashed = false;
         this.fetchNotes();
-
       }
     },
   },
@@ -143,6 +143,7 @@ export default {
           data: { noteId: note.id },
         });
         await this.fetchNotes();
+        Nova.$emit('note-deleted', this.params.resourceId);
       } catch (e) {
         Nova.error('Unknown error when trying to delete the note.');
       }
