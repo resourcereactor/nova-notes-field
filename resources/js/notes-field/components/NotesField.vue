@@ -107,6 +107,9 @@ export default {
   },
   methods: {
     async fetchNotes() {
+      if (!this.resourceId) {
+        return;
+      }
       this.loading = true;
 
       const { data } = await Nova.request().get(`/nova-vendor/nova-notes/notes`, {
