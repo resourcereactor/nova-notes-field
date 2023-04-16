@@ -8,8 +8,6 @@ use Laravel\Nova\Fields\Field;
 class NotesField extends Field
 {
     public $component = 'nova-notes-field';
-    public $showOnCreation = false;
-    public $showOnIndex = false;
 
     /**
      * NovaNotesField constructor.
