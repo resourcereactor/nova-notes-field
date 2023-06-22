@@ -1,28 +1,24 @@
 <template>
-  <div class="flex items-center space-x-3">
-    <div>{{ latestNote?.text }}</div>
-    <Icon
+    <div class="flex items-center space-x-3">
+        <div :title="latestNote?.text">{{ truncateText(latestNote?.text) }}</div>
+        <Icon
       class="text-primary-500 hover:text-primary-600 cursor-pointer"
-      type="pencil-alt"
+      type="plus"
       @click.stop="createNotePopup = true"
-    ></Icon>
-    <CustomModal
-      :show="createNotePopup"
-      max-width="screen-md"
-      size="5xl"
-      @close-via-escape="createNotePopup = false"
     >
-      <CreateNote
+        </Icon>
+        <CustomModal :show="createNotePopup" max-width="screen-md" size="5xl" @close-via-escape="createNotePopup = false">
+            <CreateNote
         :params="params"
         :anonymous="anonymous"
         :field="field"
         class="absolute right-0 top-[7.5rem]"
-        @fetch-notes="fetchNotes"
+                @fetch-notes="fetchNotes"
         @cancel="createNotePopup = false"
         @click.stop
       ></CreateNote>
-    </CustomModal>
-  </div>
+        </CustomModal>
+    </div>
 </template>
 
 <script>
@@ -60,7 +56,29 @@ export default {
     },
   },
 
+  mounted() {
+    this.anonymous = this.field?.anonymize;
+    this.fetchNotes();
+
+    Nova.$on('note-deleted', () => {
+      this.fetchNotes();
+    });
+  },
+
+  unmounted() {
+    Nova.$off('note-deleted', () => {
+      this.fetchNotes();
+    });
+  },
+
   methods: {
+    truncateText(text) {
+      if (text && text.length > 50) {
+        return `${text.slice(0, 50)}...`;
+      }
+      return text;
+    },
+
     async fetchNotes() {
       this.loading = true;
 
@@ -77,20 +95,5 @@ export default {
       this.loading = false;
     },
   },
-
-  mounted() {
-    this.anonymous = this.field?.anonymize;
-    this.fetchNotes();
-
-    Nova.$on('note-deleted', () => {
-      this.fetchNotes();
-    });
-  },
-
-  unmounted() {
-    Nova.$off('note-deleted', () => {
-      this.fetchNotes();
-    });
-  }
 };
 </script>
