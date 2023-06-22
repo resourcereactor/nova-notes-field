@@ -11,12 +11,12 @@
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.2.33",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.14",
     "cross-env": "^7.0.3",
     "form-backend-validation": "^2.3.3",
     "laravel-mix": "^6.0.41",
     "lodash": "^4.17.21",
-    "postcss": "^8.4.13",
+    "postcss": "^8.4.24",
     "prettier": "^2.5.1",
     "resolve-url-loader": "^3.1.4",
     "sass": "^1.45.0",
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "moment": "^2.29.4",
+    "tailwindcss": "^3.3.2",
     "vue": "^3.2.22"
   }
 }
