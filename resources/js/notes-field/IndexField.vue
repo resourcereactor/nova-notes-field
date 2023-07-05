@@ -1,8 +1,8 @@
 <template>
-    <div class="flex items-center space-x-3">
+    <div class="flex justify-between space-x-3">
         <div :title="latestNote?.text">{{ truncateText(latestNote?.text) }}</div>
         <Icon
-      class="text-primary-500 hover:text-primary-600 cursor-pointer"
+      class="text-gray-500 hover:text-primary-600 cursor-pointer"
       type="plus"
       @click.stop="createNotePopup = true"
     >
