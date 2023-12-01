@@ -1,14 +1,14 @@
 <template>
   <div
-    class="pointer-events-auto z-10 w-[24.125rem] rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10"
+    class="pointer-events-auto z-10 w-[24.125rem] rounded-lg bg-white dark:bg-gray-700 text-[0.8125rem] leading-5 text-gray-700 shadow-xl shadow-black/5 ring-1 ring-slate-700/10 dark:text-gray-400"
   >
     <div class="mx-3">
       <h2 class="my-3 inline-block text-base leading-tight">Create Note</h2>
       <SuggestionsBox rows="5" :suggestions="suggestions" @update="updateNote"></SuggestionsBox>
 
       <div class="my-6 flex justify-between">
-        <BasicButton @click="$emit('cancel')">Cancel</BasicButton>
-        <LoadingButton @click="createNote()">Create</LoadingButton>
+        <DefaultButton @click="$emit('cancel')">Cancel</DefaultButton>
+        <DefaultButton @click="createNote()">Create</DefaultButton>
       </div>
     </div>
   </div>

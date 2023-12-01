@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-between space-x-3">
-        <div :title="latestNote?.text">{{ truncateText(latestNote?.text) }}</div>
+        <div v-tooltip="latestNote?.text">{{ truncateText(latestNote?.text) }}</div>
         <Icon
       class="text-gray-500 hover:text-primary-600 cursor-pointer"
       type="plus"
