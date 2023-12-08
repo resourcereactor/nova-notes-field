@@ -28,6 +28,18 @@ class NotesField extends Field
     }
 
     /**
+     * Resolve the given attribute from the given resource.
+     *
+     * @param  mixed  $resource
+     * @param  string  $attribute
+     * @return mixed
+     */
+    protected function resolveAttribute($resource, $attribute)
+    {
+        return $resource->$attribute()->latest()->first();
+    }
+
+    /**
      * Sets the placeholder value displayed on the field.
      *
      * @param string $placeholder

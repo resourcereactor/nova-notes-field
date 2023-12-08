@@ -1,21 +1,17 @@
 <template>
     <div class="flex justify-between space-x-3">
         <div v-tooltip="latestNote?.text">{{ truncateText(latestNote?.text) }}</div>
-        <Icon
-      class="text-gray-500 hover:text-primary-600 cursor-pointer"
-      type="plus"
-      @click.stop="createNotePopup = true"
-    >
+        <Icon class="hover:text-primary-600 cursor-pointer text-gray-500" type="plus" @click.stop="createNotePopup = true">
         </Icon>
         <CustomModal :show="createNotePopup" max-width="screen-md" size="5xl" @close-via-escape="createNotePopup = false">
             <CreateNote
-        :params="params"
-        :anonymous="anonymous"
-        :field="field"
-        class="absolute right-0 top-[7.5rem]"
+                :params="params"
+                :anonymous="anonymous"
+                :field="field"
+                class="absolute right-0 top-[7.5rem]"
                 @fetch-notes="fetchNotes"
-        @cancel="createNotePopup = false"
-        @click.stop
+                @cancel="createNotePopup = false"
+                @click.stop
       ></CreateNote>
         </CustomModal>
     </div>
