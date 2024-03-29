@@ -1,10 +1,10 @@
 <template>
-    <div class="flex justify-between space-x-3">
-        <div v-tooltip="latestNote?.text">{{ truncateText(latestNote?.text) }}</div>
-        <Icon class="hover:text-primary-600 cursor-pointer text-gray-500" type="plus" @click.stop="createNotePopup = true">
-        </Icon>
-        <CustomModal :show="createNotePopup" max-width="screen-md" size="5xl" @close-via-escape="createNotePopup = false">
-            <CreateNote
+  <div class="flex justify-between space-x-3">
+    <div v-tooltip="field.value.text">{{ truncateText(field.value.text) }}</div>
+    <Icon class="hover:text-primary-600 cursor-pointer text-gray-500" type="plus" @click.stop="createNotePopup = true">
+    </Icon>
+    <CustomModal :show="createNotePopup" max-width="screen-md" size="5xl" @close-via-escape="createNotePopup = false">
+      <CreateNote
                 :params="params"
                 :anonymous="anonymous"
                 :field="field"
@@ -12,9 +12,9 @@
                 @fetch-notes="fetchNotes"
                 @cancel="createNotePopup = false"
                 @click.stop
-      ></CreateNote>
-        </CustomModal>
-    </div>
+            ></CreateNote>
+    </CustomModal>
+  </div>
 </template>
 
 <script>
@@ -44,12 +44,12 @@ export default {
       };
     },
 
-    latestNote() {
-      if (!this.notes.length) {
-        return;
-      }
-      return [...this.notes].shift();
-    },
+    // latestNote() {
+    //   if (!this.notes.length) {
+    //     return;
+    //   }
+    //   return [...this.notes].shift();
+    // },
   },
 
   mounted() {
@@ -75,21 +75,21 @@ export default {
       return text;
     },
 
-    async fetchNotes() {
-      this.loading = true;
+    // async fetchNotes() {
+    //   this.loading = true;
 
-      const { data } = await Nova.request().get(`/nova-vendor/nova-notes/notes`, {
-        params: this.params,
-      });
-      const { notes, date_format: dateFormat, trix_enabled: trixEnabled, full_width: fullWidth } = data;
+    //   const { data } = await Nova.request().get(`/nova-vendor/nova-notes/notes`, {
+    //     params: this.params,
+    //   });
+    //   const { notes, date_format: dateFormat, trix_enabled: trixEnabled, full_width: fullWidth } = data;
 
-      if (Array.isArray(notes)) this.notes = notes;
-      this.dateFormat = dateFormat;
-      this.trixEnabled = trixEnabled;
-      this.fullWidth = fullWidth;
+    //   if (Array.isArray(notes)) this.notes = notes;
+    //   this.dateFormat = dateFormat;
+    //   this.trixEnabled = trixEnabled;
+    //   this.fullWidth = fullWidth;
 
-      this.loading = false;
-    },
+    //   this.loading = false;
+    // },
   },
 };
 </script>

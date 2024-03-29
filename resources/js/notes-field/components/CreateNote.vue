@@ -45,6 +45,7 @@ export default {
     async createNote() {
       try {
         await Nova.request().post(`/nova-vendor/nova-notes/notes`, { note: this.note }, { params: this.params });
+        Nova.$emit('refresh-resources');
         this.$emit('fetchNotes');
         this.$emit('cancel');
       } catch (e) {
