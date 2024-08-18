@@ -1,10 +1,10 @@
 <template>
-  <div class="flex justify-between space-x-3">
-    <div v-tooltip="field.value.text">{{ truncateText(field.value.text) }}</div>
-    <Icon class="hover:text-primary-600 cursor-pointer text-gray-500" type="plus" @click.stop="createNotePopup = true">
-    </Icon>
-    <CustomModal :show="createNotePopup" max-width="screen-md" size="5xl" @close-via-escape="createNotePopup = false">
-      <CreateNote
+    <div class="flex justify-between space-x-3">
+        <div v-tooltip="field.value?.text">{{ truncateText(field.value?.text) }}</div>
+        <Icon class="hover:text-primary-600 cursor-pointer text-gray-500" type="plus" @click.stop="createNotePopup = true">
+        </Icon>
+        <CustomModal :show="createNotePopup" max-width="screen-md" size="5xl" @close-via-escape="createNotePopup = false">
+        <CreateNote
                 :params="params"
                 :anonymous="anonymous"
                 :field="field"
@@ -12,13 +12,15 @@
                 @fetch-notes="fetchNotes"
                 @cancel="createNotePopup = false"
                 @click.stop
-            ></CreateNote>
-    </CustomModal>
-  </div>
+            >
+            </CreateNote>
+        </CustomModal>
+    </div>
 </template>
 
 <script>
-import CreateNote from './components/CreateNote';
+import CreateNote from './components/CreateNote.vue';
+
 export default {
   components: { CreateNote },
   props: ['resourceName', 'resourceId', 'field'],
